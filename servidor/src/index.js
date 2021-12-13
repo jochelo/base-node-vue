@@ -14,7 +14,7 @@ app.use(cors());
  * ROUTES
  * */
 
-app.use(require('./routes/api'));
+app.use('/api', require('./routes/api'));
 
 /**
  * PUBLIC
