@@ -13,8 +13,11 @@ FrutaController.indexPedido = async (req, res) => {
 
 FrutaController.storePedido = async (req, res) => {
     const data = req.body;// await Fruta.getPedidos();
-    console.log(data);
-    // res.status(200).json(frutasPedido);
+    for (const pedido of data) {
+        await Fruta.createPedido(pedido);
+    }
+    const frutasPedido = await Fruta.getPedidos();
+    res.status(200).json(frutasPedido);
 }
 
 

@@ -38,7 +38,7 @@
             <h5>LISTA DE FRUTAS SELECCIONADAS</h5>
           </div>
           <div class="card-body">
-            <fruta-pedido-index></fruta-pedido-index>
+            <fruta-pedido-index :pedidos="pedidos"></fruta-pedido-index>
           </div>
         </div>
       </div>
@@ -59,7 +59,9 @@ import {storeFrutasPedido} from "./services/fruta-service";
    data(){
      return {
        listaPedidos: [],
-       cantidad: 0
+       cantidad: 0,
+       pedidos: [],
+       resetear: false
      }
    },
    methods: {
@@ -67,16 +69,22 @@ import {storeFrutasPedido} from "./services/fruta-service";
        this.listaPedidos = [];
        listaFrutas.map((fruta) => {
          this.listaPedidos.push({
-           fruta_id: fruta.id,
-           cantidad: 0
+           cantidad: 0,
+           fruta_id: fruta.id
          });
        });
+     },
+     onReset(){
+       this.listaPedidos = [];
+       this.cantidad = 0;
      },
      async onStorePedido() {
        this.listaPedidos.map( (data) => {
          data.cantidad = this.cantidad
        });
-       await storeFrutasPedido(this.listaPedidos);
+       this.pedidos = await storeFrutasPedido(this.listaPedidos);
+
+       this.onReset();
      }
    }
  }

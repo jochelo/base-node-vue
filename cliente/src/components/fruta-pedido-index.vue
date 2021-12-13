@@ -1,6 +1,6 @@
 <template>
   <div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action" aria-current="true" v-for="fruta in frutasPedido">
+    <a href="#" class="list-group-item list-group-item-action" aria-current="true" v-for="fruta in pedidos">
       {{ fruta.cantidad + ' ' + fruta.nombreFruta + ' ' + fruta.precio * fruta.cantidad }}
     </a>
   </div>
@@ -17,9 +17,12 @@ export default {
       frutasPedido: []
     }
   },
+  props: {
+    pedidos: Array
+  },
   methods: {
     async onInit() {
-      this.frutasPedido = await getFrutasPedido();
+      // this.frutasPedido = await getFrutasPedido();
     }
   },
   created() {
